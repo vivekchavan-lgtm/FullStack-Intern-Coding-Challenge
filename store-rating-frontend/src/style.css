@@ -1,0 +1,126 @@
+/* Simple Beginner CSS */
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  margin: 0;
+  background-color: #fff;
+  color: #333;
+}
+
+h1, h2, h3 {
+  color: #000;
+}
+
+.card {
+  border: 1px solid #aaa;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 8px 15px;
+  background-color: #ddd;
+  border: 1px solid #999;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #ccc;
+}
+
+.navbar {
+  background-color: #eee;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+}
+
+.navbar a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: blue;
+}
+
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+table.data-table th, table.data-table td {
+  border: 1px solid #888;
+  padding: 8px;
+  text-align: left;
+}
+
+table.data-table th {
+  background-color: #eee;
+}
+
+.notification {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #000;
+}
+
+.notification.error {
+  background-color: #ffdddd;
+  border-color: red;
+  color: red;
+}
+
+.notification.success {
+  background-color: #ddffdd;
+  border-color: green;
+  color: green;
+}
+
+.grid-stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card {
+  border: 1px dashed #666;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.loader-container {
+  padding: 20px;
+  font-size: 18px;
+}
+
+.loader {
+  display: none;
+}
+
+.loader-container::after {
+  content: "Loading... Please wait.";
+}
+
+.star-rating {
+  font-weight: bold;
+}

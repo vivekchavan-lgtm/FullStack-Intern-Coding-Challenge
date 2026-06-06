@@ -74,7 +74,21 @@ const updateRating = async (req, res) => {
   res.json(result.rows[0]);
 };
 
+const getMyRatings = async (req, res) => {
+  try {
+    const user_id = req.user.id;
+    const result = await pool.query(
+      "SELECT store_id, rating FROM ratings WHERE user_id=$1",
+      [user_id]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   addRating,
-  updateRating
+  updateRating,
+  getMyRatings
 };

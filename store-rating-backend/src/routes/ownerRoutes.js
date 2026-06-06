@@ -16,5 +16,11 @@ router.get(
   authorize("OWNER"),
   ownerController.getOwnerDashboard
 );
+router.get(
+  "/raters",
+  verifyToken,
+  authorize("OWNER"),
+  ownerController.getRaters
+);
 
 module.exports = router;

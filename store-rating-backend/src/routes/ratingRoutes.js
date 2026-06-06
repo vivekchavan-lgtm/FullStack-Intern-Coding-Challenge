@@ -17,4 +17,10 @@ router.put(
   verifyToken,
   ratingController.updateRating
 );
+router.get(
+  "/my",
+  verifyToken,
+  ratingController.getMyRatings
+);
+
 module.exports = router;

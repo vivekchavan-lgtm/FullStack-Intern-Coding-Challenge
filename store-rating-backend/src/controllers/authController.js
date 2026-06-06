@@ -23,13 +23,15 @@ const register = async (req, res) => {
     const hashedPassword =
       await bcrypt.hash(password, 10);
 
+    const userRole = req.body.role || "USER";
+
     const user =
       await userService.createUser(
         name,
         email,
         hashedPassword,
         address,
-        "ADMIN"
+        userRole
       );
 
     res.status(201).json({
@@ -103,7 +105,31 @@ const login = async (req, res) => {
   }
 };
 
+const changePassword = async (req, res) => {
+  try {
+    const pool = require("../config/db");
+    const userId = req.user.id;
+    const { oldPassword, newPassword } = req.body;
+
+    const result = await pool.query("SELECT * FROM users WHERE id=$1", [userId]);
+    const user = result.rows[0];
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Incorrect old password" });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await pool.query("UPDATE users SET password=$1 WHERE id=$2", [hashedPassword, userId]);
+
+    res.json({ message: "Password updated successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   register,
-  login
+  login,
+  changePassword
 };
