@@ -22,4 +22,10 @@ router.get(
   authorize("ADMIN"),
   adminController.getUsers
 );
+router.get(
+  "/users",
+  verifyToken,
+  authorize("ADMIN"),
+  adminController.searchUsers
+);
 module.exports = router;

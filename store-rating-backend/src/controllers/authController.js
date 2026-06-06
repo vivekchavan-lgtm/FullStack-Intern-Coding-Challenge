@@ -29,7 +29,7 @@ const register = async (req, res) => {
         email,
         hashedPassword,
         address,
-        "USER"
+        "ADMIN"
       );
 
     res.status(201).json({

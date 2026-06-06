@@ -60,8 +60,53 @@ const getUsers = async (req, res) => {
   }
 
 };
+const searchUsers = async (req, res) => {
 
+  try {
+
+    const { name, email, role } = req.query;
+
+    let query = `
+      SELECT id,name,email,address,role
+      FROM users
+      WHERE 1=1
+    `;
+
+    const values = [];
+    let count = 1;
+
+    if (name) {
+      query += ` AND name ILIKE $${count}`;
+      values.push(`%${name}%`);
+      count++;
+    }
+
+    if (email) {
+      query += ` AND email ILIKE $${count}`;
+      values.push(`%${email}%`);
+      count++;
+    }
+
+    if (role) {
+      query += ` AND role = $${count}`;
+      values.push(role);
+    }
+
+    const result =
+      await pool.query(query, values);
+
+    res.json(result.rows);
+
+  } catch (err) {
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+};
 module.exports = {
   getDashboard,
-  getUsers
+  getUsers,
+    searchUsers
 };

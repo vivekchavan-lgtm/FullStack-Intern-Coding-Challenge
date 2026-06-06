@@ -16,6 +16,13 @@ router.post(
   authorize("ADMIN"),
   storeController.createStore
 );
+
+router.get(
+  "/search",
+  verifyToken,
+  storeController.searchStores
+);
+
 router.get(
   "/",
   verifyToken,
