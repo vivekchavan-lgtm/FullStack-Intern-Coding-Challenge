@@ -1,15 +1,15 @@
 require("dotenv").config();
+const bcrypt = require("bcryptjs");
 const pool = require("./src/config/db");
 
-async function checkConstraint() {
+async function testRegister() {
   try {
+    const password = await bcrypt.hash("Test@123", 10);
     const res = await pool.query(
-      `SELECT pg_get_constraintdef(c.oid) AS constraint_def
-       FROM pg_constraint c
-       JOIN pg_class t ON c.conrelid = t.oid
-       WHERE t.relname = 'users' AND c.contype = 'c';`
+      `INSERT INTO users (name,email,password,address,role) VALUES ($1,$2,$3,$4,$5) RETURNING *`,
+      ["Test Name For Validation Over 20 Chars", `test_${Date.now()}@test.com`, password, "Test Address", "USER"]
     );
-    console.log("Constraints:", res.rows);
+    console.log("Success:", res.rows[0]);
   } catch (err) {
     console.error("DB Error:", err.message);
   } finally {
@@ -17,4 +17,4 @@ async function checkConstraint() {
   }
 }
 
-checkConstraint();
+testRegister();

@@ -36,6 +36,12 @@ label {
   border: 1px solid #ccc;
 }
 
+.form-error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
 button {
   padding: 8px 15px;
   background-color: #ddd;
